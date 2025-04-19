@@ -27,19 +27,19 @@ const userSchema = new mongoose.Schema({
     ]
 }, { timestamps: true });
 
-// 🔐 Hash password if modified
+
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
-// 🔍 Password checker
+
 userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-// 🔑 Generate JWT token
+
 userSchema.methods.generateAccessToken = function () {
     console.log("made jwt" , this._id)
     return jwt.sign(
