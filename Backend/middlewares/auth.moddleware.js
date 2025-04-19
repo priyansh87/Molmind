@@ -5,7 +5,7 @@ dotenv.config({}) ;
 export const protect = async (req, res, next) => {
   try {
     let token;
-    // console.log("in auth middleware",req?.headers?.authorization)
+    console.log("in auth middleware",req?.headers?.authorization)
 
     
     if (
